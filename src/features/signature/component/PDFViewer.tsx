@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Rnd } from "react-rnd";
-import { Field } from "./SignEditor";
+import { Signer, SignatureField } from "./SignEditor";
 import styles from "./sign-editor.module.css";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -25,28 +25,31 @@ type Props = {
   setCurrentPage: (v: number) => void;
   numPages: number;
   setNumPages: (v: number) => void;
-  fieldsByPage: Map<number, Field[]>;
-  updateField: (id: string, patch: Partial<Field>) => void;
-  selectedFieldId: string | null;
-  setSelectedFieldId: (id: string) => void;
+  signers: Signer[];
+  fieldsOnCurrentPage: SignatureField[];
+  updateField: (signerId: string, patch: Partial<SignatureField>) => void;
+  placingSignerId: string | null;
+  selectedSignerId: string | null;
+  setSelectedSignerId: (id: string | null) => void;
 };
 
-export default function PdfViewer(props: Props) {
-  const {
-    fileUrl,
-    setFileUrl,
-    currentPage,
-    setCurrentPage,
-    numPages,
-    setNumPages,
-    fieldsByPage,
-    updateField,
-    selectedFieldId,
-    setSelectedFieldId,
-  } = props;
+export default function PdfViewer({
+  fileUrl,
+  setFileUrl,
+  currentPage,
+  setCurrentPage,
+  numPages,
+  setNumPages,
+  signers,
+  fieldsOnCurrentPage,
+  updateField,
+  placingSignerId,
+  selectedSignerId,
+  setSelectedSignerId,
+}: Props) {
   const [pageHeight, setPageHeight] = useState<number>(0);
   const [isClient, setIsClient] = useState(false);
-  const pageWidth = 800;
+  const pageWidth = 780;
 
   useEffect(() => {
     setIsClient(true);
@@ -58,11 +61,13 @@ export default function PdfViewer(props: Props) {
     });
   }, []);
 
-  if (!isClient) return <div>Loading PDF...</div>;
+  if (!isClient) return <div>Loading PDF viewer...</div>;
+
+  const getSignerName = (signerId: string) =>
+    signers.find((s) => s.id === signerId)?.name ?? "Unknown";
 
   return (
-    <>
-      {/* Toolbar */}
+    <div>
       <div className={styles.toolbar}>
         <input
           type="file"
@@ -72,41 +77,48 @@ export default function PdfViewer(props: Props) {
             if (!file) return;
             const url = URL.createObjectURL(file);
             setFileUrl(url);
-            setCurrentPage(1);
           }}
         />
 
-        <div>
+        <div className={styles.pageNav}>
           <button
             disabled={currentPage <= 1}
             onClick={() => setCurrentPage(currentPage - 1)}
           >
-            Prev
+            ← Prev
           </button>
-
-          <span>
-            PAGE {currentPage} / {numPages || 1}
+          <span className={styles.pageInfo}>
+            Page {currentPage} / {numPages || 1}
           </span>
-
           <button
             disabled={currentPage >= numPages}
             onClick={() => setCurrentPage(currentPage + 1)}
           >
-            Next
+            Next →
           </button>
         </div>
       </div>
 
+      {placingSignerId && (
+        <div className={styles.placingBannerPdf}>
+          📍 Placement Mode — <strong>{getSignerName(placingSignerId)}</strong>:
+          drag &amp; resize kotak untuk atur posisi tanda tangan
+        </div>
+      )}
+
       {!fileUrl ? (
         <div className={styles.empty}>
-          Silakan pilih file PDF untuk memulai editing.
+          Silakan upload file PDF untuk memulai editing.
         </div>
       ) : (
         <PDFDocument
           file={fileUrl}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
         >
-          <div className={styles.pdfContainer} style={{ height: pageHeight }}>
+          <div
+            className={styles.pdfContainer}
+            style={{ height: pageHeight || "auto" }}
+          >
             <PDFPage
               pageNumber={currentPage}
               width={pageWidth}
@@ -119,53 +131,62 @@ export default function PdfViewer(props: Props) {
             />
 
             <div className={styles.overlay} style={{ height: pageHeight }}>
-              {(fieldsByPage.get(currentPage) ?? []).map((field) => (
-                <Rnd
-                  key={field.id}
-                  bounds="parent"
-                  enableResizing
-                  size={{
-                    width: field.w,
-                    height: field.h,
-                  }}
-                  position={{
-                    x: field.x,
-                    y: field.y,
-                  }}
-                  onDragStop={(e, d) =>
-                    updateField(field.id, { x: d.x, y: d.y })
-                  }
-                  onResizeStop={(e, dir, ref, delta, pos) =>
-                    updateField(field.id, {
-                      x: pos.x,
-                      y: pos.y,
-                      w: ref.offsetWidth,
-                      h: ref.offsetHeight,
-                    })
-                  }
-                >
-                  <div
-                    onClick={() => setSelectedFieldId(field.id)}
-                    className={
-                      selectedFieldId === field.id
-                        ? styles.selectedField
-                        : styles.field
-                    }
+              {fieldsOnCurrentPage.map((field) => {
+                const isSelected = selectedSignerId === field.signerId;
+                const isPlacing = placingSignerId === field.signerId;
+                const signerName = getSignerName(field.signerId);
+
+                return (
+                  <Rnd
+                    key={field.signerId}
+                    bounds="parent"
+                    enableResizing
+                    size={{ width: field.w, height: field.h }}
+                    position={{ x: field.x, y: field.y }}
+                    onDragStop={(e, d) => {
+                      console.log(
+                        `[COORD] ${signerName} - Page: ${currentPage}, x: ${Math.round(d.x)}, y: ${Math.round(d.y)}`,
+                      );
+                      updateField(field.signerId, { x: d.x, y: d.y });
+                    }}
+                    onResizeStop={(e, dir, ref, delta, pos) => {
+                      console.log(
+                        `[RESIZE] ${signerName} - Page: ${currentPage}, x: ${Math.round(pos.x)}, y: ${Math.round(pos.y)}, w: ${ref.offsetWidth}, h: ${ref.offsetHeight}`,
+                      );
+                      updateField(field.signerId, {
+                        x: pos.x,
+                        y: pos.y,
+                        w: ref.offsetWidth,
+                        h: ref.offsetHeight,
+                      });
+                    }}
+                    disableDragging={!isPlacing && !isSelected}
                   >
-                    {field.signature ? (
-                      <img src={field.signature} alt="signature" />
-                    ) : field.text ? (
-                      <span className={styles.fieldText}>{field.text}</span>
-                    ) : (
-                      field.label
-                    )}
-                  </div>
-                </Rnd>
-              ))}
+                    <div
+                      onClick={() => setSelectedSignerId(field.signerId)}
+                      className={
+                        isSelected
+                          ? styles.fieldSelected
+                          : isPlacing
+                            ? styles.fieldPlacing
+                            : styles.field
+                      }
+                    >
+                      {field.signature ? (
+                        <img src={field.signature} alt="signature" />
+                      ) : field.text ? (
+                        <span className={styles.fieldText}>{field.text}</span>
+                      ) : (
+                        <span className={styles.fieldLabel}>{signerName}</span>
+                      )}
+                    </div>
+                  </Rnd>
+                );
+              })}
             </div>
           </div>
         </PDFDocument>
       )}
-    </>
+    </div>
   );
 }
