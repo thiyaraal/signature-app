@@ -6,7 +6,6 @@ import SignerPanel from "./SignerPanel";
 import SignaturePadSection from "./SignaturePadSection";
 import styles from "./sign-editor.module.css";
 
-// ─── Types ──────────────────────────────────────────────────────────────────
 export type Signer = {
   id: string;
   name: string;
@@ -23,7 +22,6 @@ export type SignatureField = {
   text?: string;
 };
 
-// ─── Component ───────────────────────────────────────────────────────────────
 export default function SignEditor() {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [numPages, setNumPages] = useState<number>(0);
@@ -32,12 +30,10 @@ export default function SignEditor() {
   const [signers, setSigners] = useState<Signer[]>([]);
   const [fields, setFields] = useState<Map<string, SignatureField>>(new Map());
 
-  // ID signer yang sedang dalam "placement mode"
   const [placingSignerId, setPlacingSignerId] = useState<string | null>(null);
-  // ID signer yang field-nya sedang dipilih (untuk signature pad)
+
   const [selectedSignerId, setSelectedSignerId] = useState<string | null>(null);
 
-  // ── Signer actions ────────────────────────────────────────────────────────
   const addSigner = (name: string) => {
     const id = `signer-${Date.now()}`;
     setSigners((prev) => [...prev, { id, name }]);
@@ -54,10 +50,8 @@ export default function SignEditor() {
     if (selectedSignerId === id) setSelectedSignerId(null);
   };
 
-  // ── Set / Edit position ───────────────────────────────────────────────────
   const handleSetPosition = (signerId: string) => {
     if (!fields.has(signerId)) {
-      // Buat field baru di posisi default halaman saat ini
       setFields((prev) =>
         new Map(prev).set(signerId, {
           signerId,
@@ -69,7 +63,6 @@ export default function SignEditor() {
         }),
       );
     } else {
-      // Navigasi ke halaman field sudah ada
       const f = fields.get(signerId)!;
       setCurrentPage(f.page);
     }
@@ -77,7 +70,6 @@ export default function SignEditor() {
     setSelectedSignerId(signerId);
   };
 
-  // ── Update field (posisi / ukuran / tanda tangan) ─────────────────────────
   const updateField = (signerId: string, patch: Partial<SignatureField>) => {
     setFields((prev) => {
       const existing = prev.get(signerId);
@@ -86,7 +78,6 @@ export default function SignEditor() {
     });
   };
 
-  // ── Derived ───────────────────────────────────────────────────────────────
   const fieldsOnCurrentPage = useMemo(
     () => Array.from(fields.values()).filter((f) => f.page === currentPage),
     [fields, currentPage],
@@ -103,7 +94,6 @@ export default function SignEditor() {
         <h2 className={styles.title}>📄 PDF Sign Editor</h2>
 
         <div className={styles.editorLayout}>
-          {/* ── Signer Sidebar ── */}
           <SignerPanel
             signers={signers}
             fields={fields}
@@ -114,7 +104,6 @@ export default function SignEditor() {
             onDonePlacing={() => setPlacingSignerId(null)}
           />
 
-          {/* ── Main PDF Area ── */}
           <div className={styles.pdfSection}>
             <PdfViewer
               fileUrl={fileUrl}
@@ -134,7 +123,6 @@ export default function SignEditor() {
               setSelectedSignerId={setSelectedSignerId}
             />
 
-            {/* Signature pad muncul hanya jika field sudah dipilih */}
             {selectedField && selectedSigner && (
               <SignaturePadSection
                 signer={selectedSigner}
