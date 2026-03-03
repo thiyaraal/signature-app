@@ -1,0 +1,26 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background-color: #2b57fa;
+  color: white;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  margin-top: 20px;
+  width: 100%;
+  font-family: inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.25s,
+    transform 0.25s;
+}
+
+.button-icon {
+  display: flex;
+  align-items: center;
+}
