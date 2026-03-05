@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Signer, SignatureField } from "./SignEditor";
-import styles from "./sign-editor.module.css";
+import { Signer, SignatureField } from "../../hooks/useSignEditor";
+import styles from "./signer-panel.module.css";
 
 type Props = {
   signers: Signer[];
@@ -67,7 +67,6 @@ export default function SignerPanel({
               key={signer.id}
               className={`${styles.signerCard} ${isPlacing ? styles.signerCardActive : ""}`}
             >
-              {/* Avatar + Info */}
               <div className={styles.signerInfo}>
                 <div className={styles.signerAvatar}>
                   {signer.name.charAt(0).toUpperCase()}

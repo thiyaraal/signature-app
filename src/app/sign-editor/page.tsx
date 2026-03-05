@@ -1,6 +1,6 @@
 // "use client";
 
-import SignEditor from "@/src/features/signature/component/SignEditor";
+import SignEditor from "@/src/features/signature/component/SignEditor/SignEditor";
 
 // import { useMemo, useState, useEffect, useRef } from "react";
 // import { Rnd } from "react-rnd";

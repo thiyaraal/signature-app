@@ -4,6 +4,7 @@ import { LoginFormComponent } from "@/src/features/auth/component/LoginFormCompo
 import { useLoginHook } from "@/src/features/auth/hooks/LoginHook";
 import { useRouter } from "next/navigation";
 import { FaFolder } from "react-icons/fa";
+import styles from "@/src/features/auth/component/login-form-component.module.css";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,13 +13,13 @@ export default function LoginPage() {
     useLoginHook();
 
   return (
-    <div className="login">
-      <div className="login__card">
-        <div className="icon-card">
-          <FaFolder className="icon-card__icon" />
+    <div className={styles.login}>
+      <div className={styles.loginCard}>
+        <div className={styles.iconCard}>
+          <FaFolder className={styles.iconCardIcon} />
         </div>
-        <h2 className="login__title">Welcome Back</h2>
-        <p className="login__subtitle"> Login to your account</p>
+        <h2 className={styles.loginTitle}>Welcome Back</h2>
+        <p className={styles.loginSubtitle}> Login to your account</p>
 
         <LoginFormComponent
           username={username}

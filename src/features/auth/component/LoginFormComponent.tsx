@@ -1,6 +1,6 @@
 import { InputField } from "../../../shared/widget/Input/InputfieldWidget";
 import { ButtonWidget } from "../../../shared/widget/button/ButtonWidget";
-import "./LoginFormComponent.css";
+import styles from "./login-form-component.module.css";
 
 interface LoginFormComponent {
   username: string;
@@ -21,7 +21,7 @@ export function LoginFormComponent({
 }: LoginFormComponent) {
   return (
     <form
-      className="login__form"
+      className={styles.loginForm}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();

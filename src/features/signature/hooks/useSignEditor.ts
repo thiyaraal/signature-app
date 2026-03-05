@@ -1,10 +1,4 @@
-"use client";
-
 import { useState, useMemo } from "react";
-import PdfViewer from "./PDFViewer";
-import SignerPanel from "./SignerPanel";
-import SignaturePadSection from "./SignaturePadSection";
-import styles from "./sign-editor.module.css";
 
 export type Signer = {
   id: string;
@@ -22,7 +16,7 @@ export type SignatureField = {
   text?: string;
 };
 
-export default function SignEditor() {
+export function useSignEditor() {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [numPages, setNumPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -31,7 +25,6 @@ export default function SignEditor() {
   const [fields, setFields] = useState<Map<string, SignatureField>>(new Map());
 
   const [placingSignerId, setPlacingSignerId] = useState<string | null>(null);
-
   const [selectedSignerId, setSelectedSignerId] = useState<string | null>(null);
 
   const addSigner = (name: string) => {
@@ -88,51 +81,28 @@ export default function SignEditor() {
     ? fields.get(selectedSignerId)
     : undefined;
 
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.cardWide}>
-        <h2 className={styles.title}>📄 PDF Sign Editor</h2>
-
-        <div className={styles.editorLayout}>
-          <SignerPanel
-            signers={signers}
-            fields={fields}
-            placingSignerId={placingSignerId}
-            onAddSigner={addSigner}
-            onRemoveSigner={removeSigner}
-            onSetPosition={handleSetPosition}
-            onDonePlacing={() => setPlacingSignerId(null)}
-          />
-
-          <div className={styles.pdfSection}>
-            <PdfViewer
-              fileUrl={fileUrl}
-              setFileUrl={(url) => {
-                setFileUrl(url);
-                setCurrentPage(1);
-              }}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              numPages={numPages}
-              setNumPages={setNumPages}
-              signers={signers}
-              fieldsOnCurrentPage={fieldsOnCurrentPage}
-              updateField={updateField}
-              placingSignerId={placingSignerId}
-              selectedSignerId={selectedSignerId}
-              setSelectedSignerId={setSelectedSignerId}
-            />
-
-            {selectedField && selectedSigner && (
-              <SignaturePadSection
-                signer={selectedSigner}
-                field={selectedField}
-                updateField={updateField}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return {
+    fileUrl,
+    setFileUrl: (url: string | null) => {
+      setFileUrl(url);
+      setCurrentPage(1);
+    },
+    numPages,
+    setNumPages,
+    currentPage,
+    setCurrentPage,
+    signers,
+    fields,
+    addSigner,
+    removeSigner,
+    handleSetPosition,
+    updateField,
+    placingSignerId,
+    setPlacingSignerId,
+    selectedSignerId,
+    setSelectedSignerId,
+    fieldsOnCurrentPage,
+    selectedSigner,
+    selectedField,
+  };
 }

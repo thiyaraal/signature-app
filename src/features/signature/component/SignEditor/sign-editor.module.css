@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+
+  padding: 24px;
+  background: #f1f5f9;
+  min-height: 100vh;
+  font-family: Inter, sans-serif;
+}
+
+.cardWide {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
+}
+
+.title {
+  margin-bottom: 24px;
+  color: #0f172a;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.signerPanel {
+  width: 280px;
+  flex-shrink: 0;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editorLayout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}

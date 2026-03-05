@@ -6,7 +6,7 @@
   background-color: #f5f5f5;
 }
 
-.login__card {
+.loginCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@
   background-color: white;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-.icon-card {
+.iconCard {
   align-self: center;
   width: 60px;
   height: 60px;
@@ -29,12 +29,12 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.icon-card__icon {
+.iconCardIcon {
   color: white;
   font-size: 24px;
 }
 
-.login__title {
+.loginTitle {
   margin-bottom: 6px;
   margin-top: 1rem;
   font-size: 24px;
@@ -43,14 +43,14 @@
   color: #333;
 }
 
-.login__subtitle {
+.loginSubtitle {
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 14px;
   color: #666;
 }
 
-.login__form {
+.loginForm {
   width: 100%;
   display: flex;
   flex-direction: column;

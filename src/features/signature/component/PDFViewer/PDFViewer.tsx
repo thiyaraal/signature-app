@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Rnd } from "react-rnd";
-import { Signer, SignatureField } from "./SignEditor";
-import styles from "./sign-editor.module.css";
+import { Signer, SignatureField } from "../../hooks/useSignEditor";
+import { usePDFViewer } from "../../hooks/usePDFViewer";
+import styles from "./pdf-viewer.module.css";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -47,24 +47,10 @@ export default function PdfViewer({
   selectedSignerId,
   setSelectedSignerId,
 }: Props) {
-  const [pageHeight, setPageHeight] = useState<number>(0);
-  const [isClient, setIsClient] = useState(false);
-  const pageWidth = 780;
-
-  useEffect(() => {
-    setIsClient(true);
-    import("react-pdf").then((pdf) => {
-      pdf.pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-        "pdfjs-dist/build/pdf.worker.min.mjs",
-        import.meta.url,
-      ).toString();
-    });
-  }, []);
+  const { pageHeight, setPageHeight, isClient, pageWidth, getSignerName } =
+    usePDFViewer(signers);
 
   if (!isClient) return <div>Loading PDF viewer...</div>;
-
-  const getSignerName = (signerId: string) =>
-    signers.find((s) => s.id === signerId)?.name ?? "Unknown";
 
   return (
     <div>
@@ -144,15 +130,9 @@ export default function PdfViewer({
                     size={{ width: field.w, height: field.h }}
                     position={{ x: field.x, y: field.y }}
                     onDragStop={(e, d) => {
-                      console.log(
-                        `[COORD] ${signerName} - Page: ${currentPage}, x: ${Math.round(d.x)}, y: ${Math.round(d.y)}`,
-                      );
                       updateField(field.signerId, { x: d.x, y: d.y });
                     }}
                     onResizeStop={(e, dir, ref, delta, pos) => {
-                      console.log(
-                        `[RESIZE] ${signerName} - Page: ${currentPage}, x: ${Math.round(pos.x)}, y: ${Math.round(pos.y)}, w: ${ref.offsetWidth}, h: ${ref.offsetHeight}`,
-                      );
                       updateField(field.signerId, {
                         x: pos.x,
                         y: pos.y,

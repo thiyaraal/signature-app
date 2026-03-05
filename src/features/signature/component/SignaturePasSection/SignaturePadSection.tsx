@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import { Signer, SignatureField } from "./SignEditor";
-import styles from "./sign-editor.module.css";
+import { Signer, SignatureField } from "../../hooks/useSignEditor";
+import { useSignaturePad } from "../../hooks/useSignaturePad";
+import styles from "./signature-pad.module.css";
 
 type Props = {
   signer: Signer;
@@ -11,38 +11,22 @@ type Props = {
   updateField: (signerId: string, patch: Partial<SignatureField>) => void;
 };
 
-type Mode = "signature" | "text";
-
 export default function SignaturePadSection({
   signer,
   field,
   updateField,
 }: Props) {
-  const sigRef = useRef<SignatureCanvas>(null);
-  const [mode, setMode] = useState<Mode>("signature");
-  const [textInput, setTextInput] = useState(field.text ?? "");
-
-  const saveSignature = () => {
-    const dataUrl = sigRef.current?.toDataURL();
-    if (dataUrl) {
-      updateField(signer.id, { signature: dataUrl, text: undefined });
-    }
-  };
-
-  const clearSignature = () => {
-    sigRef.current?.clear();
-    updateField(signer.id, { signature: undefined });
-  };
-
-  const applyText = () => {
-    if (!textInput.trim()) return;
-    updateField(signer.id, { text: textInput.trim(), signature: undefined });
-  };
-
-  const clearText = () => {
-    setTextInput("");
-    updateField(signer.id, { text: undefined });
-  };
+  const {
+    sigRef,
+    mode,
+    setMode,
+    textInput,
+    setTextInput,
+    saveSignature,
+    clearSignature,
+    applyText,
+    clearText,
+  } = useSignaturePad(signer.id, field.text ?? "", updateField);
 
   return (
     <div className={styles.signatureSection}>
