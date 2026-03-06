@@ -16,6 +16,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  .progressCardList {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }
 
 .logoIcon {
@@ -28,7 +35,7 @@
   justify-content: center;
 
   color: white;
-  background: linear-gradient(to bottom, #6a11cb, #2575fc);
+  background: linear-gradient(to bottom, #59168b, #264294);
 }
 
 .logoIcon svg {
@@ -71,6 +78,13 @@
 
 .sidebar {
   width: 350px;
+  height: 100vh;
+}
+
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .personalSideBar {
@@ -86,6 +100,7 @@
   align-items: center;
   gap: 10px;
 }
+
 .userProfile {
   display: flex;
 }
@@ -98,11 +113,13 @@
   align-items: center;
   justify-content: center;
   color: white;
-  background: linear-gradient(to bottom, #6a11cb, #2575fc);
+  background: linear-gradient(to bottom, #59168b, #264294);
 }
+
 .userInfo {
   padding-left: 12px;
 }
+
 .userName {
   font-size: 20px;
   font-weight: bold;
@@ -119,11 +136,10 @@
   align-items: center;
   justify-content: space-between;
 
-  margin: 20px 20px 10px 20px; /* Diubah: margin bawah jadi 10px saja */
+  margin: 20px 20px 10px 20px;
   padding: 12px 12px;
   border-radius: 12px;
-  border-color: #6c8dc6;
-  border-width: 1px;
+  border: 1px solid #6c8dc6;
   background-color: #f1f2f5;
 }
 
@@ -133,14 +149,14 @@
 }
 
 .roleName {
-  color: #2575fc;
+  color: #264294;
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
 .roleIcon {
-  color: #2575fc;
+  color: #264294;
   font-size: 20px;
 }
 
@@ -161,24 +177,58 @@
   text-transform: uppercase;
 }
 
-.cardTagAdmin {
+.ptSection {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background-color: #f8f9fa;
+  gap: 12px;
+  padding: 12px;
   border-radius: 8px;
 }
 
-.circleTag {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #2575fc;
+.ptIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e3f2fd;
+  color: #264294;
+  font-size: 20px;
 }
 
-.nameTag {
+.ptContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.ptTitle {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.ptName {
   font-size: 14px;
+  font-weight: 600;
   margin: 0;
   color: #333;
+}
+
+.buttonLogout {
+  margin-top: auto;
+  padding: 20px;
+}
+
+.progressCardList {
+  padding: 20px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.buttonUploadDocument {
+  padding: 20px;
+  margin-left: auto;
 }
