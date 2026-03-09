@@ -5,13 +5,17 @@
   --foreground: #171717;
 
   --primary-blue: #264294;
+  --secondary-blue: #c3cdec;
   --primary-purple: #59168b;
   --primary-yellow: #f9d226;
+  --primary-orange: #f97316;
+  --secondary-orange: #f9d9a1;
   --secondary-yellow: #fffbd2;
   --primary-green: #0e542c;
   --primary-red: #82181a;
   --primary-brown: #733e0a;
   --light-blue-border: #6c8dc6;
+  --primary-grey: #9ca3af;
 }
 
 @theme {

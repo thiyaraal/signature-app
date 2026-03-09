@@ -2,12 +2,12 @@ import type { ReactNode } from "react";
 import "./ButtonWidget.css";
 
 interface ButtonProps {
-  color?: string;
   label: string;
   onClick?: () => void;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   icon?: ReactNode;
+  variant?: "primary" | "secondary";
 }
 
 export function ButtonWidget({
@@ -15,7 +15,7 @@ export function ButtonWidget({
   onClick,
   disabled = false,
   type = "submit",
-  color,
+  variant = "primary",
   icon,
 }: ButtonProps) {
   return (
@@ -23,8 +23,7 @@ export function ButtonWidget({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className="button"
-      style={{ backgroundColor: color }}
+      className={`button button-${variant}`}
     >
       {icon && <span className="button-icon">{icon}</span>}
       <span>{label}</span>

@@ -1,10 +1,12 @@
 "use client";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   FaCheck,
   FaCircle,
   FaCircleCheck,
   FaCity,
+  FaInfo,
+  FaPaperPlane,
   FaPencil,
   FaUser,
 } from "react-icons/fa6";
@@ -12,9 +14,13 @@ import styles from "./pages.module.css";
 import { CSidebar, CSidebarNav } from "@coreui/react";
 import { ButtonWidget } from "@/src/shared/widget/button/ButtonWidget";
 import { PiBagFill } from "react-icons/pi";
-import { FaTimes, FaTimesCircle } from "react-icons/fa";
+import { FaInfoCircle, FaTimes, FaTimesCircle } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
 import { ProgressCard } from "@/src/shared/widget/card/ProgressCard";
+import { Nav } from "react-bootstrap";
+import CustomNav from "@/src/features/dashboard/component/sidebar/NavbarComponent";
+import DocumentNav from "@/src/features/dashboard/component/sidebar/NavbarComponent";
+import SignEditor from "../../features/signature/component/SignEditor/SignEditor";
 
 export default function DashboardPage() {
   const progressCards = [
@@ -126,12 +132,14 @@ export default function DashboardPage() {
                   <p className={styles.titleName}>NAVIGATION</p>
 
                   <ButtonWidget
+                    variant="primary"
                     label="Document"
                     icon={<FaPencil />}
                     onClick={() => {}}
                   />
 
                   <ButtonWidget
+                    variant="secondary"
                     label="User Management"
                     icon={<FaUser />}
                     onClick={() => {}}
@@ -176,8 +184,7 @@ export default function DashboardPage() {
             onClick={() => {}}
           />
         </div>
-
-        <div className={styles.progressCardList}>
+        <div className={`${styles.progressCardList} border-top border-bottom`}>
           {progressCards.map((card, index) => (
             <ProgressCard
               key={index}
@@ -189,6 +196,30 @@ export default function DashboardPage() {
               iconColor={card.iconColor}
             />
           ))}
+        </div>
+        <div className={styles.navbar}>
+          <DocumentNav />
+        </div>
+        <div className={styles.contentNavbar}>
+          <div className={styles.contentCard}>
+            <div className={styles.iconCard}>
+              <FaPaperPlane />
+            </div>
+            <div className={styles.titleCard}>
+              <p>NDA Agreement 2025.pdf</p>
+              <p>Non-Disclosure Agreement for new project collaboration</p>
+              <div className={styles.upluoadDeatil}>
+                <p className={styles.upluoader}>
+                  Uploaded by Thiyara Al-Mawaddah
+                </p>
+                <p className={styles.upluoadDate}>Uploaded on 2025-01-01</p>
+                <div className={styles.upluoadSigned}>
+                  <FaUser />
+                  <p>0/2 SignEditor</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

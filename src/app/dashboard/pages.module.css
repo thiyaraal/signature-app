@@ -229,6 +229,39 @@
 }
 
 .buttonUploadDocument {
-  padding: 20px;
   margin-left: auto;
+  padding-bottom: 14px;
+  padding-right: 14px;
+}
+
+.contentCard {
+  width: 100%;
+  display: inline-flex;
+  border-radius: 12px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  border: 3px solid var(--primary-orange);
+}
+
+.iconCard {
+  background-color: var(--secondary-orange);
+  color: var(--primary-red);
+  font-size: 18px;
+  padding: 12px;
+  height: 48px;
+  width: 48px;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.titleCard {
+  font-size: 16px;
+  padding-left: 20px;
+}
+
+.amountCard {
+  font-size: 24px;
+  font-weight: bold;
+  padding-left: 20px;
 }
