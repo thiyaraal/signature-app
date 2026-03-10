@@ -8,7 +8,6 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import styles from "./navbar-component.module.css";
-import { Form, InputGroup } from "react-bootstrap";
 
 export default function DocumentNav() {
   const [active, setActive] = useState("signature");

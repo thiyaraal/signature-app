@@ -1,0 +1,143 @@
+.sidebar {
+  width: 350px;
+  height: 100vh;
+}
+
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.personalSideBar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 350px;
+}
+
+.logoContent {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userProfile {
+  display: flex;
+}
+
+.logoUser {
+  width: 62px;
+  height: 62px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(to bottom, #59168b, #264294);
+}
+
+.userInfo {
+  padding-left: 12px;
+}
+
+.userName {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.userEmail {
+  font-size: 16px;
+  margin: 0;
+}
+
+.roleSidebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 20px 20px 10px 20px;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #6c8dc6;
+  background-color: #f1f2f5;
+}
+
+.roleTitle {
+  font-size: 16px;
+  margin: 0;
+}
+
+.roleName {
+  color: #264294;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.roleIcon {
+  color: #264294;
+  font-size: 20px;
+}
+
+.topSidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.topContentSidebar {
+  padding: 20px 20px 10px 20px;
+}
+
+.titleName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6c757d;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.ptSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.ptIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e3f2fd;
+  color: #264294;
+  font-size: 20px;
+}
+
+.ptContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.ptTitle {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.ptName {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.buttonLogout {
+  margin-top: auto;
+  padding: 20px;
+}

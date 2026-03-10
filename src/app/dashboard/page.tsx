@@ -5,6 +5,7 @@ import {
   FaCircle,
   FaCircleCheck,
   FaCity,
+  FaEye,
   FaInfo,
   FaPaperPlane,
   FaPencil,
@@ -17,10 +18,12 @@ import { PiBagFill } from "react-icons/pi";
 import { FaInfoCircle, FaTimes, FaTimesCircle } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
 import { ProgressCard } from "@/src/shared/widget/card/ProgressCard";
-import { Nav } from "react-bootstrap";
-import CustomNav from "@/src/features/dashboard/component/sidebar/NavbarComponent";
-import DocumentNav from "@/src/features/dashboard/component/sidebar/NavbarComponent";
+import { Nav, ProgressBar } from "react-bootstrap";
+
 import SignEditor from "../../features/signature/component/SignEditor/SignEditor";
+import { RiProgress2Fill } from "react-icons/ri";
+import SideBarComponent from "@/src/features/dashboard/component/sidebar/SidebarComponent";
+import DocumentNav from "@/src/features/dashboard/component/navbar/NavbarComponent";
 
 export default function DashboardPage() {
   const progressCards = [
@@ -68,95 +71,24 @@ export default function DashboardPage() {
   return (
     <div className={styles.dashboardLayout}>
       <div className={styles.sidebar}>
-        <CSidebar
-          className={`${styles.sidebar} border-end custom-sidebar`}
-          visible={true}
-        >
-          <div className={styles.sidebarContainer}>
-            <div>
-              <div className={`${styles.topSidebar} border-bottom`}>
-                <div className={styles.personalSideBar}>
-                  <div className={styles.logoContent}>
-                    <div className={styles.userProfile}>
-                      <div className={styles.logoUser}>
-                        <FaUser />
-                      </div>
-
-                      <div className={styles.userInfo}>
-                        <p className={styles.userName}>Thiyara Al- Mawaddah</p>
-                        <p className={styles.userEmail}>thiyaraal@gmail.com</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.roleSidebar}>
-                  <div>
-                    <p className={styles.roleTitle}>Role</p>
-                    <p className={styles.roleName}>Administrator</p>
-                  </div>
-                  <FaCircleCheck className={styles.roleIcon} />
-                </div>
-              </div>
-
-              <CSidebarNav className="border-bottom">
-                <div className={styles.topContentSidebar}>
-                  <p className={styles.titleName}>Organization</p>
-
-                  <div className={styles.ptSection}>
-                    <div className={styles.ptIcon}>
-                      <FaCity />
-                    </div>
-
-                    <div className={styles.ptContent}>
-                      <p className={styles.ptTitle}>Company</p>
-                      <p className={styles.ptName}>PT Technology Indonesia</p>
-                    </div>
-                  </div>
-
-                  <div className={styles.ptSection}>
-                    <div className={styles.ptIcon}>
-                      <PiBagFill />
-                    </div>
-
-                    <div className={styles.ptContent}>
-                      <p className={styles.ptTitle}>Division</p>
-                      <p className={styles.ptName}>IT & Development</p>
-                    </div>
-                  </div>
-                </div>
-              </CSidebarNav>
-
-              <CSidebarNav className="border-bottom">
-                <div className={styles.topContentSidebar}>
-                  <p className={styles.titleName}>NAVIGATION</p>
-
-                  <ButtonWidget
-                    variant="primary"
-                    label="Document"
-                    icon={<FaPencil />}
-                    onClick={() => {}}
-                  />
-
-                  <ButtonWidget
-                    variant="secondary"
-                    label="User Management"
-                    icon={<FaUser />}
-                    onClick={() => {}}
-                  />
-                </div>
-              </CSidebarNav>
-            </div>
-
-            <div className={styles.buttonLogout}>
-              <ButtonWidget
-                label="Logout"
-                icon={<FaUser />}
-                onClick={() => {}}
-              />
-            </div>
-          </div>
-        </CSidebar>
+        <SideBarComponent
+          userName="Thiyara Al-Mawaddah"
+          userEmail="thiyaraal@gmail.com"
+          role="Administrator"
+          company="PT Technology Indonesia"
+          division="IT & Development"
+          navigation={[
+            {
+              label: "Document",
+              icon: <FaPencil />,
+              variant: "primary",
+            },
+            {
+              label: "User Management",
+              icon: <FaUser />,
+            },
+          ]}
+        />
       </div>
 
       <div className={styles.mainContent}>
@@ -186,15 +118,16 @@ export default function DashboardPage() {
         </div>
         <div className={`${styles.progressCardList} border-top border-bottom`}>
           {progressCards.map((card, index) => (
-            <ProgressCard
-              key={index}
-              icon={card.icon}
-              amount={card.amount}
-              title={card.title}
-              cardColor={card.cardColor}
-              borderColor={card.borderColor}
-              iconColor={card.iconColor}
-            />
+            <div key={index} className={styles.gridProgressCard}>
+              <ProgressCard
+                icon={card.icon}
+                amount={card.amount}
+                title={card.title}
+                cardColor={card.cardColor}
+                borderColor={card.borderColor}
+                iconColor={card.iconColor}
+              />
+            </div>
           ))}
         </div>
         <div className={styles.navbar}>
@@ -205,18 +138,111 @@ export default function DashboardPage() {
             <div className={styles.iconCard}>
               <FaPaperPlane />
             </div>
-            <div className={styles.titleCard}>
-              <p>NDA Agreement 2025.pdf</p>
-              <p>Non-Disclosure Agreement for new project collaboration</p>
-              <div className={styles.upluoadDeatil}>
-                <p className={styles.upluoader}>
-                  Uploaded by Thiyara Al-Mawaddah
-                </p>
-                <p className={styles.upluoadDate}>Uploaded on 2025-01-01</p>
-                <div className={styles.upluoadSigned}>
-                  <FaUser />
-                  <p>0/2 SignEditor</p>
+
+            <div className={styles.contentCardRight}>
+              <div className={styles.contentCardTop}>
+                <div className={styles.titleCard}>
+                  <p className={styles.titleDocument}>NDA Agreement 2025.pdf</p>
+                  <p className={styles.subtitleDocument}>
+                    Non-Disclosure Agreement for new project collaboration
+                  </p>
+                  <div className={styles.uploadDetail}>
+                    <span>Uploaded by Thiyara Al-Mawaddah</span>
+                    <span>Uploaded on 2025-01-01</span>
+
+                    <div className={styles.uploadSigned}>
+                      <FaUser />
+                      <span>0/2 Signers</span>
+                    </div>
+                  </div>
                 </div>
+
+                <div className={styles.statusCard}>
+                  <span className={styles.iconStatusCard}>
+                    <RiProgress2Fill />
+                  </span>
+                  <span className={styles.statusText}>In-progress</span>
+                </div>
+              </div>
+
+              <div className={styles.progressBar}>
+                <ProgressBar now={60} />
+                <p className={styles.signatories}>
+                  Signatories : Thiyara Al-Mawaddah, Budi Santoso
+                </p>
+              </div>
+              <div className={styles.actionButton}>
+                <ButtonWidget
+                  width={"20%"}
+                  colorButton="var(--primary-green)"
+                  label="Sign Now"
+                  variant="primary"
+                  onClick={() => {}}
+                  icon={<FaPencil />}
+                />
+                <ButtonWidget
+                  width={"20%"}
+                  label="View Detail"
+                  variant="secondary"
+                  onClick={() => {}}
+                  icon={<FaEye />}
+                />
+              </div>
+            </div>
+          </div>
+          <div className={styles.contentCard}>
+            <div className={styles.iconCard}>
+              <FaPaperPlane />
+            </div>
+
+            <div className={styles.contentCardRight}>
+              <div className={styles.contentCardTop}>
+                <div className={styles.titleCard}>
+                  <p className={styles.titleDocument}>NDA Agreement 2025.pdf</p>
+                  <p className={styles.subtitleDocument}>
+                    Non-Disclosure Agreement for new project collaboration
+                  </p>
+                  <div className={styles.uploadDetail}>
+                    <span>Uploaded by Thiyara Al-Mawaddah</span>
+                    <span>Uploaded on 2025-01-01</span>
+
+                    <div className={styles.uploadSigned}>
+                      <FaUser />
+                      <span>0/2 Signers</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.statusCard}>
+                  <span className={styles.iconStatusCard}>
+                    <RiProgress2Fill />
+                  </span>
+                  <span className={styles.statusText}>In-progress</span>
+                </div>
+              </div>
+
+              <div className={styles.progressBar}>
+                <ProgressBar now={60} />
+                <p className={styles.signatories}>
+                  Signatories : Thiyara Al-Mawaddah, Budi Santoso
+                </p>
+              </div>
+              <div className={styles.actionButton}>
+                <ButtonWidget
+                  width={"20%"}
+                  colorButton="var(--primary-green)"
+                  label="Sign Now"
+                  variant="primary"
+                  onClick={() => {}}
+                  icon={<FaPencil />}
+                />
+                <ButtonWidget
+                  width={"20%"}
+                  label="View Detail"
+                  variant="secondary"
+                  onClick={() => {}}
+                  icon={<FaEye />}
+                />
               </div>
             </div>
           </div>
