@@ -1,0 +1,85 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.contentLeft {
+  margin-left: 20px;
+  padding-right: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  background: linear-gradient(to bottom, #59168b, #264294);
+}
+
+.logoIcon svg {
+  font-size: 20px;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.contentRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin: 0;
+}
+
+.progressCardList {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.gridProgressCard {
+  flex: 1 1 180px;
+}
+
+.contentNavbar {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buttonUploadDocument {
+  margin-left: auto;
+  padding-bottom: 14px;
+  padding-right: 14px;
+}
