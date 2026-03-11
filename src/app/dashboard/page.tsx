@@ -1,71 +1,101 @@
 "use client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
+  FaBarsProgress,
   FaCheck,
   FaCircle,
   FaCircleCheck,
-  FaCity,
   FaEye,
-  FaInfo,
+  FaFile,
   FaPaperPlane,
   FaPencil,
   FaUser,
 } from "react-icons/fa6";
 import styles from "./pages.module.css";
-import { CSidebar, CSidebarNav } from "@coreui/react";
 import { ButtonWidget } from "@/src/shared/widget/button/ButtonWidget";
-import { PiBagFill } from "react-icons/pi";
-import { FaInfoCircle, FaTimes, FaTimesCircle } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
 import { ProgressCard } from "@/src/shared/widget/card/ProgressCard";
 import { Nav, ProgressBar } from "react-bootstrap";
-
-import SignEditor from "../../features/signature/component/SignEditor/SignEditor";
 import { RiProgress2Fill } from "react-icons/ri";
 import SideBarComponent from "@/src/features/dashboard/component/sidebar/SidebarComponent";
 import DocumentNav from "@/src/features/dashboard/component/navbar/NavbarComponent";
+import { FaCheckCircle, FaFileAlt } from "react-icons/fa";
+import { GiCancel } from "react-icons/gi";
+import DocumentCard from "@/src/features/Document/component/my-document-card/DocumentCard";
 
 export default function DashboardPage() {
+  const documents = [
+    {
+      title: "NDA Agreement 2025.pdf",
+      description: "Non-Disclosure Agreement for new project collaboration",
+      uploadedBy: "Thiyara Al-Mawaddah",
+      uploadedDate: "2025-01-01",
+      signerCount: "0/2",
+      status: "In-progress",
+      progress: 60,
+      signatories: "Thiyara Al-Mawaddah, Budi Santoso",
+    },
+    {
+      title: "Partnership Contract.pdf",
+      description: "Agreement for partnership with external company",
+      uploadedBy: "Budi Santoso",
+      uploadedDate: "2025-01-02",
+      signerCount: "1/2",
+      status: "Pending",
+      progress: 40,
+      signatories: "Budi Santoso, Andi Saputra",
+    },
+    {
+      title: "Service Agreement.pdf",
+      description: "Contract for IT service collaboration",
+      uploadedBy: "Andi Saputra",
+      uploadedDate: "2025-01-03",
+      signerCount: "2/2",
+      status: "Completed",
+      progress: 100,
+      signatories: "Andi Saputra, Thiyara Al-Mawaddah",
+    },
+  ];
   const progressCards = [
     {
       icon: <IoIosTime />,
       amount: "3",
       title: "Pending my Signature",
-      cardColor: "#FFF7E6",
-      borderColor: "#F5A623",
+      cardColor: "#FFFBD2",
+      borderColor: "#f7f1b4ff",
       iconColor: "#F5A623",
     },
     {
-      icon: <FaCheck />,
+      icon: <FaCheckCircle />,
       amount: "12",
       title: "Completed",
-      cardColor: "#E8F8F5",
-      borderColor: "#1ABC9C",
+      cardColor: "#E7FDEE",
+      borderColor: "#c1f4d1ff",
       iconColor: "#1ABC9C",
     },
     {
-      icon: <FaPencil />,
+      icon: <FaBarsProgress />,
       amount: "5",
-      title: "Draft",
-      cardColor: "#EEF3FF",
-      borderColor: "#4A6CF7",
-      iconColor: "#4A6CF7",
+      title: "In Progress",
+      cardColor: "#E6F1FF",
+      borderColor: "#b0cdf1ff",
+      iconColor: "#225087ff",
     },
     {
-      icon: <FaCircle />,
+      icon: <GiCancel />,
       amount: "2",
       title: "Rejected",
-      cardColor: "#FFECEC",
-      borderColor: "#E74C3C",
-      iconColor: "#E74C3C",
+      cardColor: "#FFE6E7",
+      borderColor: "#f3c8cbff",
+      iconColor: "#ec6272ff",
     },
     {
-      icon: <FaCircleCheck />,
+      icon: <FaFileAlt />,
       amount: "7",
-      title: "Approved",
-      cardColor: "#F1FFF5",
-      borderColor: "#2ECC71",
-      iconColor: "#2ECC71",
+      title: "Total Document",
+      cardColor: "#F7F0FF",
+      borderColor: "#e2d7efff",
+      iconColor: "#7e23bfff",
     },
   ];
   return (
@@ -81,11 +111,12 @@ export default function DashboardPage() {
             {
               label: "Document",
               icon: <FaPencil />,
-              variant: "primary",
+              variant: "gradasi-blue",
             },
             {
               label: "User Management",
               icon: <FaUser />,
+              variant: "secondary",
             },
           ]}
         />
@@ -111,6 +142,7 @@ export default function DashboardPage() {
         </div>
         <div className={styles.buttonUploadDocument}>
           <ButtonWidget
+            variant="gradasi-blue"
             label="Upload Document"
             icon={<FaPencil />}
             onClick={() => {}}
@@ -134,117 +166,20 @@ export default function DashboardPage() {
           <DocumentNav />
         </div>
         <div className={styles.contentNavbar}>
-          <div className={styles.contentCard}>
-            <div className={styles.iconCard}>
-              <FaPaperPlane />
-            </div>
-
-            <div className={styles.contentCardRight}>
-              <div className={styles.contentCardTop}>
-                <div className={styles.titleCard}>
-                  <p className={styles.titleDocument}>NDA Agreement 2025.pdf</p>
-                  <p className={styles.subtitleDocument}>
-                    Non-Disclosure Agreement for new project collaboration
-                  </p>
-                  <div className={styles.uploadDetail}>
-                    <span>Uploaded by Thiyara Al-Mawaddah</span>
-                    <span>Uploaded on 2025-01-01</span>
-
-                    <div className={styles.uploadSigned}>
-                      <FaUser />
-                      <span>0/2 Signers</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.statusCard}>
-                  <span className={styles.iconStatusCard}>
-                    <RiProgress2Fill />
-                  </span>
-                  <span className={styles.statusText}>In-progress</span>
-                </div>
-              </div>
-
-              <div className={styles.progressBar}>
-                <ProgressBar now={60} />
-                <p className={styles.signatories}>
-                  Signatories : Thiyara Al-Mawaddah, Budi Santoso
-                </p>
-              </div>
-              <div className={styles.actionButton}>
-                <ButtonWidget
-                  width={"20%"}
-                  colorButton="var(--primary-green)"
-                  label="Sign Now"
-                  variant="primary"
-                  onClick={() => {}}
-                  icon={<FaPencil />}
-                />
-                <ButtonWidget
-                  width={"20%"}
-                  label="View Detail"
-                  variant="secondary"
-                  onClick={() => {}}
-                  icon={<FaEye />}
-                />
-              </div>
-            </div>
-          </div>
-          <div className={styles.contentCard}>
-            <div className={styles.iconCard}>
-              <FaPaperPlane />
-            </div>
-
-            <div className={styles.contentCardRight}>
-              <div className={styles.contentCardTop}>
-                <div className={styles.titleCard}>
-                  <p className={styles.titleDocument}>NDA Agreement 2025.pdf</p>
-                  <p className={styles.subtitleDocument}>
-                    Non-Disclosure Agreement for new project collaboration
-                  </p>
-                  <div className={styles.uploadDetail}>
-                    <span>Uploaded by Thiyara Al-Mawaddah</span>
-                    <span>Uploaded on 2025-01-01</span>
-
-                    <div className={styles.uploadSigned}>
-                      <FaUser />
-                      <span>0/2 Signers</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.statusCard}>
-                  <span className={styles.iconStatusCard}>
-                    <RiProgress2Fill />
-                  </span>
-                  <span className={styles.statusText}>In-progress</span>
-                </div>
-              </div>
-
-              <div className={styles.progressBar}>
-                <ProgressBar now={60} />
-                <p className={styles.signatories}>
-                  Signatories : Thiyara Al-Mawaddah, Budi Santoso
-                </p>
-              </div>
-              <div className={styles.actionButton}>
-                <ButtonWidget
-                  width={"20%"}
-                  colorButton="var(--primary-green)"
-                  label="Sign Now"
-                  variant="primary"
-                  onClick={() => {}}
-                  icon={<FaPencil />}
-                />
-                <ButtonWidget
-                  width={"20%"}
-                  label="View Detail"
-                  variant="secondary"
-                  onClick={() => {}}
-                  icon={<FaEye />}
-                />
-              </div>
-            </div>
+          <div className={styles.contentNavbar}>
+            {documents.map((doc, index) => (
+              <DocumentCard
+                key={index}
+                title={doc.title}
+                description={doc.description}
+                uploadedBy={doc.uploadedBy}
+                uploadedDate={doc.uploadedDate}
+                signerCount={doc.signerCount}
+                status={doc.status}
+                progress={doc.progress}
+                signatories={doc.signatories}
+              />
+            ))}
           </div>
         </div>
       </div>

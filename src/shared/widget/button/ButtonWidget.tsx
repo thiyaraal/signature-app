@@ -9,7 +9,7 @@ interface ButtonProps {
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   icon?: ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "gradasi-blue" | "gradasi-red";
 }
 
 export function ButtonWidget({
@@ -27,7 +27,7 @@ export function ButtonWidget({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      style={{ backgroundColor: colorButton, width: width }}
+      style={{ width: width, background: colorButton }}
       className={`button button-${variant}`}
     >
       {icon && <span className="button-icon">{icon}</span>}

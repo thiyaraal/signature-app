@@ -10,7 +10,7 @@ import styles from "./sidebar-component.module.css";
 interface NavigationItem {
   label: string;
   icon: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "gradasi-blue" | "gradasi-red";
   onClick?: () => void;
 }
 
@@ -101,7 +101,7 @@ export default function SideBarComponent({
               {navigation.map((item, index) => (
                 <ButtonWidget
                   key={index}
-                  variant={item.variant || "secondary"}
+                  variant={item.variant}
                   label={item.label}
                   icon={item.icon}
                   onClick={item.onClick}
@@ -111,9 +111,13 @@ export default function SideBarComponent({
           </CSidebarNav>
         </div>
 
-        {/* LOGOUT */}
         <div className={styles.buttonLogout}>
-          <ButtonWidget label="Logout" icon={<FaUser />} onClick={onLogout} />
+          <ButtonWidget
+            label="Logout"
+            icon={<FaUser />}
+            onClick={onLogout}
+            variant="gradasi-red"
+          />
         </div>
       </div>
     </CSidebar>
