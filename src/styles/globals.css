@@ -6,15 +6,35 @@
 
   --primary-blue: #264294;
   --secondary-blue: #c3cdec;
+  --border-blue: #b0cdf1ff;
+  --cardColor-blue: #e6f1ff;
+
   --primary-purple: #59168b;
+  --border-purple: #e0c1f0ff;
+  --cardColor-purple: #f3e8f9;
+
   --primary-yellow: #f9d226;
+  --border-yellow: #f7f1b4ff;
+  --cardColor-yellow: #fffbd2;
+
   --primary-orange: #f97316;
   --secondary-orange: #f9d9a1;
-  --secondary-yellow: #fffbd2;
+  --cardColor-orange: #fde6d8;
+  --border-orange: #f9d9a1;
+
   --primary-green: #0e542c;
-  --primary-red: #82181a;
+  --secondary-green: #e4fbe7;
+  --border-green: #c1f4d1ff;
+  --cardColor-green: #e7fdee;
+
+  --primary-red: #d71417;
+  --border-red: #e39ba0;
+  --cardColor-red: #ffdbdb;
+
   --primary-brown: #733e0a;
+
   --light-blue-border: #6c8dc6;
+
   --primary-grey: #9ca3af;
 }
 

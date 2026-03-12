@@ -1,13 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import { FaBarsProgress, FaPencil } from "react-icons/fa6";
 import styles from "./pages.module.css";
 import { ButtonWidget } from "@/src/shared/widget/button/ButtonWidget";
 import { ProgressCard } from "@/src/shared/widget/card/ProgressCard";
 import DocumentNav from "@/src/features/dashboard/component/navbar/NavbarComponent";
-import DocumentCard from "@/src/features/Document/component/my-document-card/DocumentCard";
+import SignatureCard from "@/src/features/Document/component/signature-card/SignatureCard";
 import { IoIosTime } from "react-icons/io";
 import { FaCheckCircle, FaFileAlt } from "react-icons/fa";
 import { GiCancel } from "react-icons/gi";
+import DocumentCard from "@/src/features/Document/component/my-document-card/DocumentCard";
 export default function DocumentPage() {
+  const [activeTab, setActiveTab] = useState("signature");
+
   const documents = [
     {
       title: "NDA Agreement 2025.pdf",
@@ -45,41 +51,41 @@ export default function DocumentPage() {
       icon: <IoIosTime />,
       amount: "3",
       title: "Pending my Signature",
-      cardColor: "#FFFBD2",
-      borderColor: "#f7f1b4ff",
-      iconColor: "#F5A623",
+      cardColor: "var(--cardColor-yellow)",
+      borderColor: "var(--border-yellow)",
+      iconColor: "var(--primary-yellow)",
     },
     {
       icon: <FaCheckCircle />,
       amount: "12",
       title: "Completed",
-      cardColor: "#E7FDEE",
-      borderColor: "#c1f4d1ff",
-      iconColor: "#1ABC9C",
+      cardColor: "var(--cardColor-green)",
+      borderColor: "var(--border-green)",
+      iconColor: "var(--primary-green)",
     },
     {
       icon: <FaBarsProgress />,
       amount: "5",
       title: "In Progress",
-      cardColor: "#E6F1FF",
-      borderColor: "#b0cdf1ff",
-      iconColor: "#225087ff",
+      cardColor: "var(--cardColor-blue)",
+      borderColor: "var(--border-blue)",
+      iconColor: "var(--primary-blue)",
     },
     {
       icon: <GiCancel />,
       amount: "2",
       title: "Rejected",
-      cardColor: "#FFE6E7",
-      borderColor: "#f3c8cbff",
-      iconColor: "#ec6272ff",
+      cardColor: "var(--cardColor-red)",
+      borderColor: "var(--border-red)",
+      iconColor: "var(--primary-red)",
     },
     {
       icon: <FaFileAlt />,
       amount: "7",
       title: "Total Document",
-      cardColor: "#F7F0FF",
-      borderColor: "#e2d7efff",
-      iconColor: "#7e23bfff",
+      cardColor: "var(--cardColor-purple)",
+      borderColor: "var(--border-purple)",
+      iconColor: "var(--primary-purple)",
     },
   ];
   return (
@@ -119,12 +125,18 @@ export default function DocumentPage() {
       </div>
 
       <div className={styles.navbar}>
-        <DocumentNav />
+        <DocumentNav activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
       <div className={styles.contentNavbar}>
-        {documents.map((doc, index) => (
-          <DocumentCard key={index} {...doc} />
-        ))}
+        {activeTab === "signature" &&
+          documents.map((doc, index) => <SignatureCard key={index} {...doc} />)}
+        {activeTab === "documents" &&
+          documents.map((doc, index) => <DocumentCard key={index} {...doc} />)}
+        {activeTab === "history" && (
+          <div style={{ textAlign: "center", padding: "2rem", width: "100%" }}>
+            History documents placeholder
+          </div>
+        )}
       </div>
     </>
   );

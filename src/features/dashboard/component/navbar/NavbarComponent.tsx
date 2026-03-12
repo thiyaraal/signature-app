@@ -9,17 +9,21 @@ import {
 } from "react-icons/fa";
 import styles from "./navbar-component.module.css";
 
-export default function DocumentNav() {
-  const [active, setActive] = useState("signature");
+interface DocumentNavProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
+
+export default function DocumentNav({ activeTab, setActiveTab }: DocumentNavProps) {
 
   return (
     <div className={styles.navbar}>
       <div className={styles.container}>
         <button
           className={`${styles.navItem} ${
-            active === "signature" ? styles.active : ""
+            activeTab === "signature" ? styles.active : ""
           }`}
-          onClick={() => setActive("signature")}
+          onClick={() => setActiveTab("signature")}
         >
           <FaExclamationCircle />
           <span>Requires My Signature</span>
@@ -28,18 +32,18 @@ export default function DocumentNav() {
         </button>
         <button
           className={`${styles.navItem} ${
-            active === "documents" ? styles.active : ""
+            activeTab === "documents" ? styles.active : ""
           }`}
-          onClick={() => setActive("documents")}
+          onClick={() => setActiveTab("documents")}
         >
           <FaUpload />
           <span>My Documents</span>
         </button>
         <button
           className={`${styles.navItem} ${
-            active === "history" ? styles.active : ""
+            activeTab === "history" ? styles.active : ""
           }`}
-          onClick={() => setActive("history")}
+          onClick={() => setActiveTab("history")}
         >
           <FaFileAlt />
           <span>History</span>

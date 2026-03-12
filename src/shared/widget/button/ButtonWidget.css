@@ -1,8 +1,12 @@
 .button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+
+  min-width: 280px;
+  width: fit-content;
+  white-space: nowrap;
 
   background-color: #2b57fa;
   color: white;
@@ -11,7 +15,6 @@
   font-size: 1em;
   font-weight: 500;
   margin-top: 20px;
-  width: 100%;
   font-family: inherit;
   border-radius: 8px;
   cursor: pointer;
@@ -19,7 +22,6 @@
     background-color 0.25s,
     transform 0.25s;
 }
-
 .button-icon {
   display: flex;
   align-items: center;

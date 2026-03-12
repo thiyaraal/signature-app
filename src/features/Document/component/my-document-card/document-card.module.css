@@ -31,8 +31,8 @@
   border-radius: 12px;
   font-size: 18px;
 
-  background-color: var(--secondary-orange);
-  color: var(--primary-red);
+  background-color: var(--cardColor-blue);
+  color: var(--primary-blue);
 }
 
 .titleCard {
@@ -95,18 +95,111 @@
   margin: 0;
 }
 
+.listStatusSigned {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+}
+.statusSignedCard {
+  border-radius: 12px;
+  border: 2px solid #c1ead3;
+  padding: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.statusTop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.iconStatusSigned {
+  font-size: 16px;
+}
+
+.statusSigned {
+  margin: 0;
+  font-size: 12px;
+}
+
+.amount {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
 .progressBar {
   width: 100%;
   padding-top: 12px;
 }
+.progressTop {
+  margin: 2px;
+  display: flex;
+  justify-content: space-between;
+}
 
-.signatories {
+.ProgressTitle {
   font-size: 12px;
   margin: 0;
-  color: #6c757d;
+  color: black;
+}
+
+.progressPercent {
+  font-size: 12px;
+  margin: 0;
+  color: black;
 }
 
 .actionButton {
   display: flex;
   gap: 12px;
+}
+
+.infoCard {
+  margin-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  background-color: #fff5f5;
+  border: 1px solid #f5c2c7;
+}
+
+.infoIcon {
+  margin: 2px 0 0 0;
+  font-size: 20px;
+  color: var(--primary-red);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.infoTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: black;
+}
+
+.infoDescription {
+  font-size: 14px;
+  margin: 0;
+  color: var(--primary-red);
+}
+
+.infoRequired {
+  font-size: 12px;
+  margin: 4px 0 0 0;
+  font-weight: 700;
+  color: var(--primary-red);
 }
