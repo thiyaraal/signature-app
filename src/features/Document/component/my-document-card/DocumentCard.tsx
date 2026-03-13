@@ -112,10 +112,10 @@ export default function DocumentCard({
           ))}
         </div>
         <div className={styles.progressBar}>
-          <p className={styles.progressTop}>
-            <p className={styles.ProgressTitle}> Progress</p>
-            <p className={styles.progressPercent}> 67%</p>
-          </p>
+          <div className={styles.progressTop}>
+            <span className={styles.progressTitle}>Progress</span>
+            <span className={styles.progressPercent}>67%</span>
+          </div>
           <ProgressBar now={progress} variant="success" />
         </div>
         <div className={styles.infoCard}>
