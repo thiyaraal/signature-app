@@ -11,6 +11,7 @@ import { IoIosTime } from "react-icons/io";
 import { FaCheckCircle, FaFileAlt } from "react-icons/fa";
 import { GiCancel } from "react-icons/gi";
 import DocumentCard from "@/src/features/Document/component/my-document-card/DocumentCard";
+import HistoryCard from "../../../features/Document/component/history-card/HistoryCard";
 export default function DocumentPage() {
   const [activeTab, setActiveTab] = useState("signature");
 
@@ -132,11 +133,8 @@ export default function DocumentPage() {
           documents.map((doc, index) => <SignatureCard key={index} {...doc} />)}
         {activeTab === "documents" &&
           documents.map((doc, index) => <DocumentCard key={index} {...doc} />)}
-        {activeTab === "history" && (
-          <div style={{ textAlign: "center", padding: "2rem", width: "100%" }}>
-            History documents placeholder
-          </div>
-        )}
+        {activeTab === "history" &&
+          documents.map((doc, index) => <HistoryCard key={index} {...doc} />)}
       </div>
     </>
   );

@@ -1,0 +1,198 @@
+.contentCard {
+  display: flex;
+  gap: 16px;
+  margin: 20px;
+  padding: 20px;
+
+  border-radius: 12px;
+  border: 3px solid var(--primary-orange);
+}
+
+.contentCardRight {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.contentCardTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.iconCard {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+  font-size: 18px;
+
+  background-color: var(--cardColor-blue);
+  color: var(--primary-blue);
+}
+
+.titleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.titleDocument {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: black;
+}
+
+.subtitleDocument {
+  font-size: 14px;
+  margin: 0;
+  color: #6c757d;
+}
+
+.uploadDetail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.tagUpluoadSign {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: var(--secondary-blue);
+}
+
+.tagUpluoadSign p {
+  margin: 0;
+}
+
+.statusCard {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: var(--primary-green);
+  color: white;
+}
+
+.statusCard p {
+  margin: 0;
+  color: white;
+}
+.statusCardHistory {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  background-color: var(--secondary-blue);
+  border: 1px solid var(--primary-blue);
+
+  align-self: flex-start;
+}
+
+.uploadStatusContainer {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  margin: 0;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.value {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.completeStts {
+  margin: 0;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.completeSttsDate {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+}
+
+.iconStatusCard {
+  display: flex;
+  align-items: center;
+  color: var(--primary-blue);
+}
+
+.statusText {
+  font-size: 12px;
+  margin: 0;
+}
+
+.infoCard {
+  margin-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  background-color: var(--cardColor-blue);
+  border: 1px solid var(--secondary-blue);
+}
+
+.infoIcon {
+  margin: 2px 0 0 0;
+  font-size: 20px;
+  color: var(--primary-blue);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.infoTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--primary-blue);
+}
+
+.infoDescription {
+  font-size: 14px;
+  margin: 0;
+  color: var(--primary-blue);
+}
