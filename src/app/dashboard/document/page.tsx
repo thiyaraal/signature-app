@@ -12,10 +12,23 @@ import { FaCheckCircle, FaFileAlt } from "react-icons/fa";
 import { GiCancel } from "react-icons/gi";
 import DocumentCard from "@/src/features/Document/component/my-document-card/DocumentCard";
 import HistoryCard from "../../../features/Document/component/history-card/HistoryCard";
-export default function DocumentPage() {
-  const [activeTab, setActiveTab] = useState("signature");
+import { useSignatureDocuments } from "@/src/features/Document/hooks/useSignatureDoc";
+import EditModal from "@/src/features/Document/component/form-edit/EditModal";
+import { SignatureDocument } from "@/src/features/Document/model/siganture.mode";
+import CreateModal from "@/src/features/Document/component/form-add/CreateModal";
 
-  const documents = [
+export default function DocumentPage() {
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [selectedDoc, setSelectedDoc] = useState<any>(null);
+
+  const handleEdit = (doc: any) => {
+    setSelectedDoc(doc);
+  };
+  const [activeTab, setActiveTab] = useState("signature");
+  const { data, loading, error, deleteDocument, updateDocument, postDocument } =
+    useSignatureDocuments();
+
+  const documentsDummy = [
     {
       title: "NDA Agreement 2025.pdf",
       description: "Non-Disclosure Agreement for new project collaboration",
@@ -89,6 +102,9 @@ export default function DocumentPage() {
       iconColor: "var(--primary-purple)",
     },
   ];
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
   return (
     <>
       <div className={styles.navbar}>
@@ -114,6 +130,7 @@ export default function DocumentPage() {
           variant="gradasi-blue"
           label="Upload Document"
           icon={<FaPencil />}
+          onClick={() => setShowCreateModal(true)}
         />
       </div>
 
@@ -130,12 +147,58 @@ export default function DocumentPage() {
       </div>
       <div className={styles.contentNavbar}>
         {activeTab === "signature" &&
-          documents.map((doc, index) => <SignatureCard key={index} {...doc} />)}
+          data.map((doc) => (
+            <SignatureCard
+              onAdd={() => postDocument(doc)}
+              key={doc.id}
+              onDelete={() => deleteDocument(doc.id)}
+              onEdit={() => handleEdit(doc)}
+              title={doc.title}
+              description={doc.description}
+              uploadedBy={doc.uploadedBy}
+              uploadedDate={doc.uploadedDate}
+              signerCount={doc.signerCount}
+              status={doc.status}
+              progress={doc.progress}
+              signatories={doc.signatories}
+            />
+          ))}
         {activeTab === "documents" &&
-          documents.map((doc, index) => <DocumentCard key={index} {...doc} />)}
+          documentsDummy.map((doc, index) => (
+            <DocumentCard key={index} {...doc} />
+          ))}
         {activeTab === "history" &&
-          documents.map((doc, index) => <HistoryCard key={index} {...doc} />)}
+          documentsDummy.map((doc, index) => (
+            <HistoryCard key={index} {...doc} />
+          ))}
       </div>
+      {selectedDoc && (
+        <EditModal
+          data={selectedDoc}
+          onClose={() => setSelectedDoc(null)}
+          onSave={(updated: SignatureDocument) => {
+            updateDocument(updated);
+            setSelectedDoc(null);
+          }}
+        />
+      )}
+
+      {showCreateModal && (
+        <CreateModal
+          onClose={() => setShowCreateModal(false)}
+          onSave={async (data) => {
+            await postDocument(data);
+            setShowCreateModal(false);
+          }}
+        />
+      )}
+
+      {/* <ButtonWidget
+        variant="gradasi-blue"
+        label="Upload Document"
+        icon={<FaPencil />}
+        onClick={() => setShowCreateModal(true)}
+      /> */}
     </>
   );
 }

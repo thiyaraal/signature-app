@@ -1,9 +1,15 @@
-import { FaPaperPlane, FaUser, FaEye } from "react-icons/fa";
+import { FaPaperPlane, FaUser, FaEye, FaEdit } from "react-icons/fa";
 import { ProgressBar } from "react-bootstrap";
 import { RiProgress2Fill } from "react-icons/ri";
 import styles from "./signature-card.module.css";
 import { ButtonWidget } from "@/src/shared/widget/button/ButtonWidget";
-import { FaPencil } from "react-icons/fa6";
+import {
+  FaAddressBook,
+  FaDeleteLeft,
+  FaPencil,
+  FaPlus,
+  FaTrash,
+} from "react-icons/fa6";
 
 interface SignatureCardProps {
   title: string;
@@ -14,12 +20,18 @@ interface SignatureCardProps {
   status: string;
   progress: number;
   signatories: string;
+  onDelete?: () => void;
+  onEdit?: () => void;
+  onAdd?: () => void;
 }
 
 export default function SignatureCard({
   title,
   description,
   uploadedBy,
+  onDelete,
+  onEdit,
+  onAdd,
   uploadedDate,
   signerCount,
   status,
@@ -77,6 +89,18 @@ export default function SignatureCard({
             variant="secondary"
             icon={<FaEye />}
           />
+        </div>
+        <div className={styles.actionCard}>
+          <button onClick={onDelete}>
+            <FaTrash />
+          </button>
+
+          <button onClick={onEdit}>
+            <FaEdit />
+          </button>
+          {/* <button onClick={onAdd}>
+            <FaPlus />
+          </button> */}
         </div>
       </div>
     </div>
