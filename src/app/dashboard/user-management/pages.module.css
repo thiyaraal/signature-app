@@ -1,0 +1,143 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.contentLeft {
+  margin-left: 20px;
+  padding-right: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  background: linear-gradient(to bottom, #59168b, #264294);
+}
+
+.logoIcon svg {
+  font-size: 20px;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.contentCenter {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin: 0;
+}
+
+.contentRight {
+  margin-left: auto;
+}
+
+.tableContainer {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr 1fr;
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr 1fr;
+  align-items: center;
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.tableRow:hover {
+  background: #f3f4f6;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.avatar {
+color: var(--primary-blue);
+  border-radius: 12px;
+}
+
+.email {
+  color: #4b5563;
+}
+
+.role {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.role.admin {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.role.user {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.org {
+  color: #374151;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.userRole {
+  background: #e0f2fe;
+  color: #0369a1;
+}
